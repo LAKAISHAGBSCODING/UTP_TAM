@@ -40,11 +40,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 
-// Warna Biru Gelap, Krem & Hijau sesuai gambar
 val DarkNavy = Color(0xFF0D3B45)
 val LightBg = Color(0xFFF4F7F7)
 val CreamBg = Color(0xFFFCF7F1)
-val SuccessGreen = Color(0xFF4CAF50) // Warna hijau untuk tombol "DIBELI"
+val SuccessGreen = Color(0xFF4CAF50)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -170,14 +169,13 @@ fun ItemListHorizontal(barang: Barang, navController: NavController) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(barang: Barang, navController: NavController) {
-    // STATE LOGIKA
     var isFavorite by remember { mutableStateOf(false) }
-    var isBought by remember { mutableStateOf(false) } // State tombol beli
+    var isBought by remember { mutableStateOf(false) }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
     Scaffold(
-        snackbarHost = { SnackbarHost(snackbarHostState) }, // Tempat munculnya notif
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             TopAppBar(
                 title = { Text("Detail Barang", fontSize = 18.sp, fontWeight = FontWeight.Bold) },
@@ -202,12 +200,10 @@ fun DetailScreen(barang: Barang, navController: NavController) {
                     },
                     modifier = Modifier.fillMaxWidth().height(50.dp),
                     shape = CircleShape,
-                    // Logika warna: jika sudah dibeli jadi Hijau, jika belum jadi Navy
                     colors = ButtonDefaults.buttonColors(
                         containerColor = if (isBought) SuccessGreen else DarkNavy
                     )
                 ) {
-                    // Logika teks: jika sudah dibeli jadi "DIBELI"
                     Text(
                         text = if (isBought) "DIBELI" else "Beli",
                         color = Color.White,
